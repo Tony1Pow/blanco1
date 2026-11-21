@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blanco — кофейня</title>
+<meta name="description" content="Кофе, завтраки и десерты. Меню, адрес и бронь столика.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F6F3;--foam:#E9E6DE;--ink:#2A1E18;--muted:#6F625A;--crema:#B98B5E;--sage:#5F6F52;--line:#DAD6CC;
+--serif:"Fraunces",Georgia,serif;--sans:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:5;background:rgba(245,246,243,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font:600 1.5rem var(--serif);text-decoration:none;letter-spacing:.01em}
+nav a{margin-left:26px;text-decoration:none;color:var(--muted);font-weight:500;transition:color .2s}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding:72px 0 56px}
+h1{font:400 clamp(2.4rem,6vw,4.2rem)/1.05 var(--serif);margin:0 0 20px;letter-spacing:-.01em}
+.hero p{color:var(--muted);max-width:44ch;margin:0 0 28px;font-size:1.1rem}
+.btn{display:inline-block;background:var(--ink);color:var(--bg);border:0;padding:14px 28px;border-radius:999px;font:700 1rem var(--sans);cursor:pointer;text-decoration:none;transition:background .25s,transform .25s}
+.btn:hover{background:var(--sage);transform:translateY(-2px)}
+.btn.ghost{background:none;color:var(--ink);border:1.5px solid var(--ink);margin-left:10px}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.cup{width:100%;max-width:380px;justify-self:center}
+.steam path{fill:none;stroke:var(--crema);stroke-width:5;stroke-linecap:round;opacity:0;animation:steam 3.6s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:1.1s}.steam path:nth-child(3){animation-delay:2.2s}
+@keyframes steam{0%{opacity:0;transform:translateY(14px)}35%{opacity:.9}100%{opacity:0;transform:translateY(-22px)}}
+section{padding:72px 0}
+h2{font:400 clamp(1.9rem,4vw,2.8rem)/1.15 var(--serif);margin:0 0 12px}
+.lead{color:var(--muted);margin:0 0 32px;max-width:52ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tabs button{border:1.5px solid var(--line);background:none;padding:9px 20px;border-radius:999px;font:500 1rem var(--sans);cursor:pointer;transition:all .2s}
+.tabs button:hover{border-color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.list{display:grid;grid-template-columns:1fr 1fr;gap:6px 56px}
+.row{padding:16px 0;border-bottom:1px solid var(--line);animation:fade .45s ease both}
+.row .top{display:flex;justify-content:space-between;gap:16px;font-weight:700}
+.row .desc{color:var(--muted);font-size:.95rem;margin-top:2px}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.about{background:var(--foam)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:36px}
+.facts h3{font:600 1.25rem var(--serif);margin:0 0 6px}
+.facts p{margin:0;color:var(--muted)}
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.info p{margin:0 0 18px}.info b{display:block;font-size:.9rem;color:var(--muted);font-weight:500}
+form{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px}
+label{display:block;font-weight:500;margin-bottom:16px}
+input,textarea{width:100%;margin-top:6px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;background:var(--bg);transition:border-color .2s}
+input:focus,textarea:focus{border-color:var(--sage);outline:none}
+textarea{min-height:84px;resize:vertical}
+.ok{display:none;margin-top:16px;padding:12px 14px;background:#E4EBDD;border-radius:10px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.hero .rv:nth-child(2){transition-delay:.12s}.hero .rv:nth-child(3){transition-delay:.24s}
+@media(max-width:760px){.hero,.visit,.list,.facts{grid-template-columns:1fr}.hero{padding-top:40px}nav a{margin-left:16px}.cup{max-width:240px;order:-1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="#top">Blanco</a>
+<nav><a href="#menu">Меню</a><a href="#about">О нас</a><a href="#visit">Контакты</a></nav></div></header>
+
+<main id="top">
+<div class="wrap hero">
+<div>
+<h1 class="rv">Хороший кофе и спокойное утро</h1>
+<p class="rv">Свежая обжарка, завтраки до обеда и десерты каждый день. Заходите по пути или бронируйте столик.</p>
+<div class="rv"><a class="btn" href="#visit">Забронировать столик</a><a class="btn ghost" href="#menu">Смотреть меню</a></div>
+</div>
+<svg class="cup rv" viewBox="0 0 320 300" role="img" aria-label="Чашка кофе">
+<g class="steam"><path d="M110 90c-14-18 14-30 0-50"/><path d="M160 90c-14-18 14-30 0-50"/><path d="M210 90c-14-18 14-30 0-50"/></g>
+<ellipse cx="160" cy="262" rx="130" ry="20" fill="#E9E6DE"/>
+<path d="M62 118h196v58c0 44-38 78-98 78s-98-34-98-78z" fill="#fff" stroke="#DAD6CC" stroke-width="3"/>
+<path d="M258 140h14c26 0 26 52 0 52h-20" fill="none" stroke="#DAD6CC" stroke-width="12" stroke-linecap="round"/>
+<ellipse cx="160" cy="118" rx="98" ry="16" fill="#B98B5E"/>
+<ellipse cx="160" cy="118" rx="62" ry="9" fill="#E9D3B8"/>
+</svg>
+</div>
+
+<section id="menu"><div class="wrap">
+<h2 class="rv">Меню</h2>
+<p class="lead rv">Цены примерные. В боевой версии заменим на актуальные из меню кофейни.</p>
+<div class="tabs rv" id="tabs" role="tablist"></div>
+<div class="list" id="list"></div>
+</div></section>
+
+<section id="about" class="about"><div class="wrap">
+<h2 class="rv">О нас</h2>
+<p class="lead rv">Небольшая кофейня, где всё делают сами: от обжарки зерна до десертов.</p>
+<div class="facts">
+<div class="rv"><h3>Свежее зерно</h3><p>Обжариваем небольшими партиями и подбираем помол под каждый напиток.</p></div>
+<div class="rv"><h3>Своя выпечка</h3><p>Десерты и хлеб готовим утром, поэтому к обеду всё может закончиться.</p></div>
+<div class="rv"><h3>Спокойная атмосфера</h3><p>Светлый зал, розетки у столов и Wi-Fi, чтобы поработать или встретиться.</p></div>
+</div></div></section>
+
+<section id="visit"><div class="wrap visit">
+<div class="info">
+<h2 class="rv">Приходите в гости</h2>
+<div class="rv"><p><b>Адрес</b><span id="addr">Укажите адрес кофейни</span></p>
+<p><b>Часы работы</b><span id="hours">Ежедневно, 08:00 – 22:00</span></p>
+<p><b>Телефон</b><span id="phone">Укажите телефон</span></p>
+<p><b>Instagram</b><a href="https://www.instagram.com/blancokz/" target="_blank" rel="noopener">@blancokz</a></p></div>
+</div>
+<form id="form" class="rv">
+<label>Имя<input name="name" required autocomplete="name"></label>
+<label>Телефон<input name="phone" type="tel" required autocomplete="tel"></label>
+<label>Дата, время и число гостей<textarea name="message"></textarea></label>
+<button class="btn" type="submit">Отправить заявку</button>
+<div class="ok" id="ok" role="status">Заявка принята. Мы перезвоним и подтвердим бронь.</div>
+</form>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© Blanco</span><a href="https://www.instagram.com/blancokz/" target="_blank" rel="noopener">Instagram</a></div></footer>
+
+<script>
+const CURRENCY = "₸";
+const MENU = {
+ "Кофе":[["Эспрессо","Классический шот на свежем зерне",1100],["Американо","Эспрессо с горячей водой",1400],["Капучино","Эспрессо и плотная молочная пена",1700],["Флэт уайт","Двойной эспрессо, мягкое молоко",1900],["Раф","Сливки, ванильный сахар",2200],["Колд брю","Холодной экстракции, 12 часов",2400]],
+ "Чай и напитки":[["Чай сенча","Японский зелёный чай",900],["Облепиха-цитрус","Фирменный фруктовый чай",1500],["Матча на молоке","Церемониальная матча",2300],["Какао","Густое, на цельном молоке",1700],["Лимонад","Цитрус и мята",1800],["Свежевыжатый сок","Апельсин",2800]],
+ "Завтраки":[["Авокадо тост","Деревенский хлеб, яйцо пашот, зелень",4500],["Сырники","Сметанный крем, абрикосовый джем",3200],["Гранола с йогуртом","Домашний йогурт, ягоды",3300],["Овсяная каша","На молоке, с орехами",2200]],
+ "Десерты":[["Чизкейк","Классический, с ягодным соусом",2400],["Круассан","Сливочный, ещё тёплый",1500],["Морковный торт","Сливочный крем, грецкий орех",2200],["Трюфель","Финики и орехи, без сахара",600]]
+};
+const fmt = n => n.toLocaleString("ru-RU") + " " + CURRENCY;
+const tabs = document.getElementById("tabs"), list = document.getElementById("list");
+function show(cat){
+  list.innerHTML = "";
+  MENU[cat].forEach((it, i) => {
+    const r = document.createElement("div");
+    r.className = "row"; r.style.animationDelay = i * 50 + "ms";
+    r.innerHTML = '<div class="top"><span></span><span></span></div><div class="desc"></div>';
+    const s = r.querySelectorAll("span");
+    s[0].textContent = it[0]; s[1].textContent = fmt(it[2]);
+    r.querySelector(".desc").textContent = it[1];
+    list.appendChild(r);
+  });
+  tabs.querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", b.textContent === cat));
+}
+Object.keys(MENU).forEach(c => {
+  const b = document.createElement("button");
+  b.type = "button"; b.role = "tab"; b.textContent = c;
+  b.onclick = () => show(c);
+  tabs.appendChild(b);
+});
+show(Object.keys(MENU)[0]);
+
+// Появление блоков при прокрутке
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+}), {threshold:.15});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+// Пока заявка никуда не отправляется. Следующий шаг: подключить CRM или Telegram.
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  console.log("Новая заявка:", Object.fromEntries(new FormData(e.target)));
+  document.getElementById("ok").style.display = "block";
+  e.target.reset();
+});
+</script>
+</body>
+</html>
